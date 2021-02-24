@@ -25,7 +25,7 @@ SECRET_KEY = 'q)vvteh3o4ba^@^hptkvd6l-_!)1pv(tvae0z-8j*+9$9#nr1)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['restaurant-api-django.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','restaurant-api-django.herokuapp.com']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework.authtoken',
     'customers',
 ]
 
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'resturants.urls'
@@ -73,6 +75,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'resturants.wsgi.application'
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_PREMISSION_CLASSES':(
+        'rest_framework.premissions.IsAuthenticated'
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        #'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
